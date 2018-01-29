@@ -4,28 +4,24 @@
 // As the name implies, this contains a ragtag gang of methods that just don't fit
 // anywhere else.
 import { pub } from "core/pubsubhub";
-import marked from "deps/marked";
+import Remarkable from "deps/remarkable";
 export const name = "core/utils";
 
-marked.setOptions({
-  sanitize: false,
-  gfm: true,
-});
-
-const spaceOrTab = /^[\ |\t]*/;
+const spaceOrTab = /^[ |\t]*/;
 const endsWithSpace = /\s+$/gm;
 const dashes = /\-/g;
 const gtEntity = /&gt;/gm;
 const ampEntity = /&amp;/gm;
 
 export function markdownToHtml(text) {
+  const md = new Remarkable({html: true, linkify: true});
   const normalizedLeftPad = normalizePadding(text);
   // As markdown is pulled from HTML, > and & are already escaped and
   // so blockquotes aren't picked up by the parser. This fixes it.
   const potentialMarkdown = normalizedLeftPad
     .replace(gtEntity, ">")
     .replace(ampEntity, "&");
-  const result = marked(potentialMarkdown);
+  const result = md.render(potentialMarkdown);
   return result;
 }
 
@@ -259,14 +255,17 @@ export function normalizePadding(text = "") {
         const nextTo = prevSib
           ? prevSib.localName
           : node.parentElement.localName;
-        if (/^[\t\ ]/.test(node.textContent) && inlineElems.has(nextTo)) {
-          padding = node.textContent.match(/^\s+/)[0];
+        if (inlineElems.has(nextTo)) {
+          const match = /^[\t ]/.exec(node.textContent);
+          if (match) {
+            padding = match[0];
+          }
         }
         node.textContent = padding + node.textContent.replace(replacer, "");
         return replacer;
       }, new RegExp("^ {1," + chop + "}", "gm"));
     // deal with pre elements... we can chop whitespace from their siblings
-    const endsWithSpace = new RegExp(`\\ {${chop}}$`, "gm");
+    const endsWithSpace = new RegExp(` {${chop}}$`, "gm");
     Array.from(doc.body.querySelectorAll("pre"))
       .map(elem => elem.previousSibling)
       .filter(isTextNode)

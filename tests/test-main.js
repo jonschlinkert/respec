@@ -34,7 +34,7 @@ require.config({
     "core/pubsubhub": "/base/js/core/pubsubhub",
     "core/utils": "/base/js/core/utils",
     "deps/jquery": "/base/js/deps/jquery",
-    "deps/marked": "/base/js/deps/marked",
+    "deps/remarkable": "/base/js/deps/remarkable",
     "w3c/linter": "/base/js/w3c/linter",
   },
 });

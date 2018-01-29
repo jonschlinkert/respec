@@ -5,8 +5,8 @@
  * Markdown support is optional. It is enabled by setting the `format`
  * property of the configuration object to "markdown."
  *
- * We use marked for parsing Markdown:
- * https://github.com/chjj/marked
+ * We use remarkable for parsing Markdown:
+ * https://github.com/jonschlinkert/remarkable
  *
  * Note that the content of SECTION elements, and elements with a
  * class name of "note", "issue" or "req" are also parsed.

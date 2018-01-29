@@ -19,7 +19,7 @@ const srcDesMap = new Map([
   ["./node_modules/highlight.js/src/styles/github.css", "./js/core/css/"],
   ["./node_modules/hyperhtml/index.js", "./js/deps/hyperhtml.js"],
   ["./node_modules/jquery/dist/jquery.slim.js", "./js/deps/jquery.js"],
-  ["./node_modules/marked/lib/marked.js", "./js/deps/"],
+  ["./node_modules/remarkable/dist/remarkable.js", "./js/deps/remarkable.js"],
   ["./node_modules/requirejs/require.js", "./js/deps/"],
   ["./node_modules/text/text.js", "./js/deps/"],
   ["./node_modules/url-search-params/build/url-search-params.js", "./js/deps/"],
@@ -73,7 +73,7 @@ async function cp(source, dest) {
 }
 
 function toFullPath(p, base = process.cwd()) {
-  return path.isAbsolute(p) ? p : path.normalize(path.resolve(`${base}/${p}`));
+  return path.isAbsolute(p) ? p : path.normalize(path.resolve(base, p));
 }
 
 // Copy them again

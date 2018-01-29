@@ -33,7 +33,7 @@ module.exports = function(config) {
         served: true,
       },
       {
-        pattern: "js/deps/marked.js",
+        pattern: "js/deps/remarkable.js",
         included: false,
         served: true,
       },
@@ -77,7 +77,7 @@ module.exports = function(config) {
       "/deps/": "/base/js/deps/",
       "/js/deps/": "/base/js/deps/",
       "/base/deps/": "/base/js/deps/",
-      "/base/deps/marked.js": "/base/js/deps/marked.js",
+      "/base/deps/remarkable.js": "/base/js/deps/remarkable.js",
       "/worker/respec-worker.js": "/base/worker/respec-worker.js",
     },
 
